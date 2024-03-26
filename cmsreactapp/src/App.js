@@ -9,6 +9,7 @@ import { ColorModeContext, useMode } from "./theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { useState} from 'react';
 import Customer from './components/CustomerComponents/Customer';
+import AdminLoginComp from './components/LandingPage/AdminLoginComp'
 import MenuList from './pages/customer/MenuList'
 import EditStudent from './pages/admin/studentPages/EditStudent';
 import LandingPage from './components/LandingPage/LandingPage';
@@ -69,8 +70,10 @@ function App() {
         <Route path='/student/wallettopup/' element={<WalletTopup></WalletTopup>}></Route>
         <Route path='/student/placeorder/' element={<PlaceOrder></PlaceOrder>}></Route>
         <Route path='/customer/previousorderslist/' element={<PreviousOrdersList></PreviousOrdersList>}></Route>
+
         {/* <Route path='/admin/menu/' element={<MenuSelecter></MenuSelecter>}></Route> */}
         <Route path='/LoginComp/' element={<LoginComp></LoginComp>}></Route>
+        <Route path='/LoginCompAdm' element={<AdminLoginComp></AdminLoginComp>}></Route>
         <Route path='/admin/dashboard' element= {<Dashboard/>}></Route>
         <Route path='/admin/students' element={<StudentTable></StudentTable>}></Route>
         <Route path='/admin/students/add' element={<AddStudent></AddStudent>}></Route>

@@ -58,7 +58,14 @@ class OrderService{
        return axios.put(baseUrl+"/order/"+prod.pid,prod)//,{header:{"content-type":"application/json",autherization:"bearer"+<localStorage.jwttoken>}})
     }
     getCountOfPendingOrders(){
-      return axios.get(baseUrl+"/pending/count")
+      const jwt = localStorage.getItem("token")
+      return axios.get(baseUrl+"/pending/count" , {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+          // Other headers if needed
+          'Content-Type': 'application/json',
+        },
+      });
     }
 
     getPendingOrders(){

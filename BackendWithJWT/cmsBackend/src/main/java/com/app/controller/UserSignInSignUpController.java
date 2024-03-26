@@ -20,6 +20,7 @@ import com.app.dto.Signup;
 import com.app.dto.StudentDTO;
 import com.app.entities.Role;
 import com.app.security.JwtUtils;
+import com.app.service.AdminService;
 //import com.app.service.AdminService;
 //import com.app.service.InstructorService;
 import com.app.service.SigninService;
@@ -39,8 +40,8 @@ public class UserSignInSignUpController {
 //	@Autowired
 //	private InstructorService instructorService;
 //
-//	@Autowired
-//	private AdminService adminService;
+	@Autowired
+	private AdminService adminService;
 
 	@Autowired
 	private SigninService signinService;
@@ -90,9 +91,9 @@ public class UserSignInSignUpController {
 //		case ROLE_INSTRUCTOR:
 //			userDetails = instructorService.getInstructorDetails(reqDTO.getEmail());
 //			break;
-//		case ROLE_ADMIN:
-//			userDetails = adminService.getAdminByEmail(reqDTO.getEmail());
-//			break;
+		case ROLE_ADMIN:
+			userDetails = adminService.getAdminByEmail(reqDTO.getEmail());
+			break;
 		default:
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Unknown user type");
 		}

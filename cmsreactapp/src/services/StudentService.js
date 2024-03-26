@@ -12,6 +12,7 @@ class StudentService{
       console.log(id)
       console.log(password)
 
+      
        return axios.put("http://localhost:8080/student/changepassword/"+id,password, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -39,7 +40,18 @@ class StudentService{
         dob: "2000-02-15",
         courseName: "DAC"
       }
-       return axios.post("http://localhost:8080/admin/register/student",student)//,{header:{"content-type":"application/json",autherization:"bearer"+<localStorage.jwttoken>}})
+      
+      
+
+      return axios.put("http://localhost:8080/users/signup"+student, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          // Other headers if needed
+          'Content-Type': 'application/json',
+        },
+      })
+
+       // return axios.post("http://localhost:8080/admin/register/student",student)//,{header:{"content-type":"application/json",autherization:"bearer"+<localStorage.jwttoken>}})
     }
 
     deleteStudent(pid){
@@ -108,8 +120,14 @@ class StudentService{
     }
 
     getStudentCount(){
-
-      return axios.get("http://localhost:8080/admin/totalstudents")
+      const jwt = localStorage.getItem("token")
+      return axios.get("http://localhost:8080/admin/totalstudents",  {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+          // Other headers if needed
+          'Content-Type': 'application/json',
+        },
+      });
     }
     
     setBalanceAfterPayByWallet(id,amount){

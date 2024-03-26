@@ -42,7 +42,7 @@ public class SecurityConfig {
 		.antMatchers("/users/signup","/users/signin","/users/admin/signup","/courses","/courses/details",
 				"/password/sendOtp","/password/updatePassword",
 				"/images/upload/{type}/{id}","/images/download/{type}/{id}",
-				"/v*/api-doc*/**","/swagger-ui/**").permitAll()
+				"/v*/api-doc*/**","/swagger-ui/**").permitAll() 
 		// only required for JS clnts (react / angular) : for the pre flight requests
 		.antMatchers(HttpMethod.OPTIONS).permitAll()
 		.antMatchers(
@@ -61,7 +61,8 @@ public class SecurityConfig {
 				"/instructors/{instructorId}/courses")
 		.hasRole("INSTRUCTOR")
 		
-		.antMatchers("/instructors","admin/students", "/admin/students")
+		.antMatchers("/instructors","admin/students", "/admin/students","/admin/Dashboard","/admin/totalstudents",
+				"/orders/pending/count","/admin/totalstudents","/orders/pending/count")
 		.hasRole("ADMIN")
 		.anyRequest().authenticated()
 		.and()

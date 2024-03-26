@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import bgimg from "../../Assets/bgbgbg.jpeg";
 import StudentService from "../../services/StudentService";
+import AdminService from "../../services/AdminService";
 
 export default function LoginComp() {
   const password = "07072000" // 
@@ -133,18 +134,13 @@ export default function LoginComp() {
     //   // Handle invalid credentials
     //   alert("Invalid username or password");
     // }
-
-    const goToAdminLogin = () =>{
-
-      navigate("/LoginCompAdm")
-    }
     const submitForm = async () => {
       const username = document.getElementById('username').value;
         const pwd = document.getElementById('password').value;
       if(username==="admin"&&pwd==="admin"){
         alert("Welcome Back Admin")
         localStorage.setItem("username","admin")
-        navigate("/LoginCompAdm")
+        navigate("/admin/dashboard")
       }
       else{
       try {
@@ -155,7 +151,7 @@ export default function LoginComp() {
           password: pwd
         };
     
-        const res = await StudentService.login(studentCredentials);
+        const res = await AdminService.login(studentCredentials);
         console.log(res)
         if(res.data !=null){
           localStorage.clear()
@@ -164,12 +160,12 @@ export default function LoginComp() {
           localStorage.setItem("token", res.data.jwt);
           localStorage.setItem("id", res.data.userDetails.studentId);
           localStorage.setItem("name", res.data.userDetails.name);
-          localStorage.setItem("StudentDetails", res.data.userDetails);
+          localStorage.setItem("AdminDetails", res.data.userDetails);
 
           // console.log(studentRes.data);
           // localStorage.setItem("username",res.data.studentId)
           //localStorage.setItem("name",res.data.name)
-          navigate("/student/changePassword/");
+          navigate("/admin/Dashboard");
         }
       //   if (res.data === "Login successful1") {
       //     const studentRes = await StudentService.getStudentByEmail(username);
@@ -245,15 +241,8 @@ export default function LoginComp() {
             <button type="button" style={{ padding: "5px 10px", background: "#007bff", color: "#fff", border: "none", borderRadius: "3px", cursor: "pointer" }} onClick={submitForm}>
               Submit
             </button>
-            
           </div>
         </form>
-
-        <div>
-        <button type="button" style={{ padding: "5px 10px", background: "#007bff", color: "#fff", border: "none", borderRadius: "3px", cursor: "pointer" }} onClick={goToAdminLogin}>
-              Go to admin login 
-            </button>
-        </div>
       </div>
     </div>
   );
